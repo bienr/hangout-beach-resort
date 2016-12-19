@@ -1,0 +1,102 @@
+/* General */
+.green-btn {
+  background-color: #85ab00;
+  border-color: #85ab00;
+}
+
+/* Menu Contacts in Top Header */
+.top-bar {
+  padding: 8px 0;
+}
+
+.menu-contacts-container, .contact-infos {
+  width: 100%;
+}
+
+#menu-contacts {
+  padding-left: 0;
+  list-style: none;
+  margin-left: -5px;
+}
+#menu-contacts li {
+  display: inline-block;
+}
+
+.top-bar ul, .top-bar ul li {
+  float: left;
+}
+
+.top-bar-reach {
+  top: 3px;
+  position: relative;
+}
+
+/* Header */
+#main-navigation-wrapper.navbar-default .navbar-brand {
+  padding: 10px 0;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  background-color: transparent !important;
+  color: #1f2e46 !important;
+}
+
+#main-navigation-wrapper .navbar-form {
+  top: 9px;
+  position: absolute;
+}
+
+#main-navigation-wrapper .dropdown-submenu > li.current-menu-item.active > a {
+  color: #fff;
+}
+
+/* Carousel */
+.carousel-inner {
+  max-height: 700px;
+}
+
+#minimal-bootstrap-carousel .carousel-caption .thm-container .box .content {
+  top: -65px;
+  position: relative;
+}
+
+/* Testimonials */
+.rounded-testi {
+  -moz-border-radius: 80px;
+  -webkit-border-radius: 80px;
+  border-radius: 80px;
+}
+
+/* Rooms */
+.common-pad-inner {
+  padding-top: 4em;
+}
+
+.single-room-wrapper .room-overview .table > tbody > tr > th {
+  width: 20%;
+}
+
+.attachment-room-lg-thumbnail {
+  -moz-border-radius: 15px;
+  -webkit-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.room-radius {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.single-room-wrapper .question-wrapper {
+  margin: 3em 0 0;
+}
+
+/* About */
+.about-info-box ul li span {
+  padding: 0 3em 0 2em;
+}
+
+/* Activities */
