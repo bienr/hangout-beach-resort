@@ -10,3 +10,4 @@
 /wp-config-local.php
 /wp-config-sample.php
 /.htaccess
+/wp-content/debug.log
