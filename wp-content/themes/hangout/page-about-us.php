@@ -5,7 +5,7 @@
 <!-- Header  Slider style-->
  
  <!-- Header  Inner style-->
- <section class="row final-inner-header" style="background-image: url('<?php the_post_thumbnail_url(); ?>') !important;">
+ <section class="row final-inner-header">
  	<div class="container">
  		<h2 class="this-title"><?php the_title(); ?></h2>
  	</div>
@@ -58,10 +58,12 @@
      <div class="row">
      
      <div class="col-lg-6 col-md-6 col-xs-12 our-resort-value hidden-xs">
-         <div class="img-l-box"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/our-resort-values/1.jpg" alt=""></div>
-         <div class="img-r-box"><div class="img-box1"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/our-resort-values/2.jpg" alt=""></div><div class="img-box2"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/our-resort-values/3.jpg" alt=""></div></div>
-         
-         
+         <div class="img-l-box"><?php echo get_the_post_thumbnail(129); ?></div>
+         <div class="img-r-box">
+             <div class="img-box1"><?php echo get_the_post_thumbnail(131); ?></div>
+             <div class="img-box2"><?php echo get_the_post_thumbnail(133); ?></div>
+         </div>
+
          </div>
      <div class="col-lg-6 col-md-6 col-xs-12">
          
@@ -73,53 +75,38 @@
          <div class="accordian-area">
              
          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <?php
+            $values_args = array('post_type' => 'values', 'posts_per_page' => 3, 'order' => 'ASC');
+            $values_query = new WP_Query($values_args);
+
+            if ($values_query->have_posts()) :
+                while ($values_query->have_posts()) :
+                    $values_query->the_post();
+                    ?>
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
+                            <?php
+                            $values_class = get_post_custom_values($key = 'values-class')[0];
+                            ?>
+                            <div class="panel-heading" role="tab" id="heading-<?php echo $values_class; ?>">
                                 <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                                <span>WE offer luxury service to our customer</span><i class="fa fa-minus"></i><i class="fa fa-plus"></i> 
+                                <a <?php echo !($values_class == 'first') ? 'class="collapsed"' : ''; ?> role="button" data-toggle="collapse" data-parent="#accordion"
+                                    href="#collapse-<?php echo $values_class; ?>" aria-expanded="<?php echo ($values_class == 'first') ? true : false; ?>" aria-controls="collapse-<?php echo $values_class; ?>">
+                                <span><?php the_title(); ?></span><i class="fa fa-minus"></i><i class="fa fa-plus"></i>
                                 </a>
                                 </h4>
                             </div>
-                            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div id="collapse-<?php echo $values_class; ?>" class="panel-collapse collapse <?php echo ($values_class == 'first') ? 'in' : ''; ?>" role="tabpanel" aria-labelledby="heading-<?php echo $values_class; ?>">
                                 <div class="panel-body faq-content">
-                                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
-                                    
+                                    <?php the_content(); ?>
                                 </div>
                             </div>
                         </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
-                                <h4 class="panel-title">
-                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                WE offer luxury service to our customer<i class="fa fa-minus"></i><i class="fa fa-plus"></i> 
-                                </a>
-                                </h4>
-                            </div>
-                            <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
-                                <div class="panel-body faq-content">
-                                    
-                                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
-                                <h4 class="panel-title">
-                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                WE offer luxury service to our customer<i class="fa fa-minus"></i><i class="fa fa-plus"></i> 
-                                </a>
-                                </h4>
-                            </div>
-                            <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
-                                <div class="panel-body faq-content">
-                                    <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. </p>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                     
+                    <?php
+                        endwhile;
+                        wp_reset_postdata();
+                    else: ?>
+                        <p>Sorry, no values post found. Please post values through the admin panel.</p>
+                    <?php endif; ?>
                     </div>
              </div>
          
@@ -144,95 +131,43 @@
       
       <div class="testimonials-wrapper">
       <div class="testimonial-sliders">
-    
-         
+
+    <?php
+    $testi_args = array('post_type' => 'testimonials', 'posts_per_page' => 3, 'order' => 'ASC');
+    $testi_query = new WP_Query($testi_args);
+
+    if ($testi_query->have_posts()) :
+        while ($testi_query->have_posts()) :
+            $testi_query->the_post();
+            ?>
           <div class="item">
-          <div class="test-cont"><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.</p></div>             
+          <div class="test-cont"><p><?php the_content(); ?></p></div>
              <div class="test-bot">
-             <div class="tst-img"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/testimonials/1.png" alt="" class="img-responsive"></div>
+             <div class="tst-img"><?php the_post_thumbnail('testi-thumbnail', array('class' => 'img-responsive rounded-testi')); ?></div>
              <div class="client_name">
-               <h5>Mark John - <span>Nescom Technology- Director</span></h5>  
+                 <h5>
+                     <?php
+                     $testi_position = get_post_custom_values($key = 'testi-position');
+                     $testi_rating = get_post_custom_values($key = 'testi-rating')[0];
+                     ?>
+                     <a href="<?php the_permalink(); ?>"><?php the_title(); ?> - <span><?php echo $testi_position[0]; ?></span></a>
+                 </h5>
                  <ul>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-									</ul>
+                     <?php for($i = 1; $i <= $testi_rating; $i++) { ?>
+                         <li><a href="#"><i class="fa fa-star"></i></a></li>
+                     <?php }; ?>
+                 </ul>
                  </div>
              
              </div>
-          </div> 
-          
-           <div class="item">         
-             <div class="test-cont"><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.</p></div>             
-             <div class="test-bot">
-             <div class="tst-img"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/testimonials/2.png" alt="" class="img-responsive"></div>
-             <div class="client_name">
-               <h5>Mark John - <span>Nescom Technology- Director</span></h5>  
-                 <ul>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-									</ul>
-                 </div>             
-             </div>        
-         </div> 
-          <div class="item">
-          <div class="test-cont"><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.</p></div>             
-             <div class="test-bot">
-             <div class="tst-img"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/testimonials/3.png" alt="" class="img-responsive"></div>
-             <div class="client_name">
-               <h5>Mark John - <span>Nescom Technology- Director</span></h5>  
-                 <ul>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-									</ul>
-                 </div>
-             
-             </div>
-          </div> 
-          
-           <div class="item">         
-             <div class="test-cont"><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.</p></div>             
-             <div class="test-bot">
-             <div class="tst-img"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/testimonials/4.png" alt="" class="img-responsive"></div>
-             <div class="client_name">
-               <h5>Mark John - <span>Nescom Technology- Director</span></h5>  
-                 <ul>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-									</ul>
-                 </div>             
-             </div>        
-         </div> 
-          <div class="item">         
-             <div class="test-cont"><p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur.</p></div>             
-             <div class="test-bot">
-             <div class="tst-img"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/testimonials/5.png" alt="" class="img-responsive"></div>
-             <div class="client_name">
-               <h5>Mark John - <span>Nescom Technology- Director</span></h5>  
-                 <ul>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-										<li><a href="#"><i class="fa fa-star"></i></a></li>
-									</ul>
-                 </div>             
-             </div>        
-         </div> 
-          
-          
-    
+          </div>
+            <?php
+                endwhile;
+                wp_reset_postdata();
+            else: ?>
+                <p>Sorry, no testimonials found. Please add testimonials through the admin panel.</p>
+            <?php endif; ?>
+
     </div>
           
       </div>

@@ -510,8 +510,11 @@ Select drop down
 	$(window).on('scroll', function () {	
 		stickyHeader()
 	})
-	
-	
+
+	// retain styling of about list removed by WP
+	$(document).ready(function() {
+		$('.about-info-box ul li').wrapInner('<span></span>');
+	});
 	
    
 })(jQuery)

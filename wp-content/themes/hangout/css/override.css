@@ -31,7 +31,30 @@
   position: relative;
 }
 
+.top-bar.home3v, .top-bar.dhomev {
+  background: #1e1e1e;
+}
+
+.top-bar.home3v ul li a,
+.top-bar.home3v .contact-infos ul li a,
+.top-bar.dhomev ul li a,
+.top-bar.dhomev .contact-infos ul li a {
+  color: #aaa;
+}
+
+.top-bar.home3v ul li a i,
+.top-bar.home3v .contact-infos ul li a i,
+.top-bar.dhomev ul li a i,
+.top-bar.dhomev .contact-infos ul li a i {
+  color: #aaa;
+}
+
 /* Header */
+#main-navigation-wrapper.navbar-default {
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 9;
+}
+
 #main-navigation-wrapper.navbar-default .navbar-brand {
   padding: 10px 0;
 }
@@ -52,14 +75,20 @@
   color: #fff;
 }
 
+/*#main-navigation-wrapper .navbar-nav > li > .dropdown-submenu {
+  background: rgba(255, 255, 255, 0.92);
+}*/
 /* Carousel */
-.carousel-inner {
-  max-height: 700px;
+.carousel {
+  top: -102px;
 }
 
-#minimal-bootstrap-carousel .carousel-caption .thm-container .box .content {
-  top: -65px;
-  position: relative;
+.carousel-inner {
+  max-height: 800px;
+}
+
+.no-top-common-pad {
+  padding-top: 0 !important;
 }
 
 /* Testimonials */
@@ -97,6 +126,10 @@
 /* About */
 .about-info-box ul li span {
   padding: 0 3em 0 2em;
+}
+
+.final-inner-header {
+  background-image: url("../images/about/bamboo.jpeg");
 }
 
 /* Activities */

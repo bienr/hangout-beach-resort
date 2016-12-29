@@ -385,7 +385,7 @@ function create_post_type_values() {
         'label'                 => __('values', 'hangout'),
         'description'           => __('Values under the About page', 'hangout'),
         'labels'                => $values_labels,
-        'supports'              => array('title', 'editor', 'thumbnail'),
+        'supports'              => array('title', 'editor', 'thumbnail', 'custom-fields'),
         'taxonomies'            => array('values'),
         'hierarchical'          => false,
         'public'                => true,

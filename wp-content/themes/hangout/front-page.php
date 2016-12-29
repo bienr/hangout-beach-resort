@@ -63,7 +63,7 @@
 <!-- Header  Slider style-->
 
 <!-- Rooms And Suits style-->
-<section class="container clearfix common-pad nasir-style">
+<section class="container clearfix common-pad nasir-style no-top-common-pad">
     <div class="sec-header sec-header-pad">
         <h2>Rooms And Suits</h2>
         <h3>Pick a room that best suits your taste and budget</h3>
