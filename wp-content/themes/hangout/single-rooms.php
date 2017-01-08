@@ -59,7 +59,7 @@
                    <div class="col-lg-4"><input type="text" class="form-control" id="email" name="name" placeholder="Email"></div>
 
               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                       <textarea class="form-control" rows="6" id="message" name="message" placeholder="Message"></textarea>
+                       <textarea class="form-control" rows="6" id="message" name="message" placeholder="Please specify the type of the room/facility in your question"></textarea>
                     </div>
 
                   <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><button type="submit" class="res-btn">Submit Now <i class="fa fa-arrow-right"></i></button></div>

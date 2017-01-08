@@ -73,6 +73,7 @@ function hangout_setup() {
     add_image_size("rooms-thumbnail", 270, 228, true);
     add_image_size("testi-thumbnail", 76, 76, true);
     add_image_size("room-lg-thumbnail", 800, 450, true);
+    add_image_size("about-aside", 300, 413, true);
 
     // Enable gallery post format
     add_theme_support("post-formats", array("gallery"));

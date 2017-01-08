@@ -38,7 +38,7 @@
       
       <div class="img-cap-effect">
           <div class="img-box">
-          <img src="<?php echo get_stylesheet_directory_uri(); ?>/images/about/1.jpg" alt="">
+            <?php the_post_thumbnail("about-aside"); ?>
           <div class="img-caption">
               
               </div>
